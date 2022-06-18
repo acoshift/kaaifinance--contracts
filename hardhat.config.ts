@@ -9,26 +9,12 @@ import 'solidity-coverage'
 
 // hack :D
 const {
-	getEtherscanEndpoints,
+	getEtherscanEndpoints
 } = require('@nomiclabs/hardhat-etherscan/dist/src/network/prober')
 
 dotenv.config()
 
 const accounts = process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : []
-
-const chainConfig: any = {
-	rei: {
-		chainId: 55555,
-		urls: {
-			apiURL: 'https://reiscan.com/api',
-			browserURL: 'https://reiscan.com/'
-		}
-	}
-}
-
-subtask('verify:get-etherscan-endpoint').setAction(async (_, { network }) =>
-	getEtherscanEndpoints(network.provider, network.name, chainConfig)
-)
 
 const config: HardhatUserConfig = {
 	solidity: '0.8.14',
@@ -40,7 +26,17 @@ const config: HardhatUserConfig = {
 		}
 	},
 	etherscan: {
-		apiKey: 'yay :D'
+		apiKey: 'yay :D',
+		customChains: [
+			{
+				network: 'rei',
+				chainId: 55555,
+				urls: {
+					apiURL: 'https://reiscan.com/api',
+					browserURL: 'https://reiscan.com/'
+				}
+			}
+		]
 	}
 }
 
