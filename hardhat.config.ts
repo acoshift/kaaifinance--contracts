@@ -7,11 +7,6 @@ import '@typechain/hardhat'
 import 'hardhat-gas-reporter'
 import 'solidity-coverage'
 
-// hack :D
-const {
-	getEtherscanEndpoints
-} = require('@nomiclabs/hardhat-etherscan/dist/src/network/prober')
-
 dotenv.config()
 
 const accounts = process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : []
